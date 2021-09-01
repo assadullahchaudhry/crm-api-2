@@ -12,10 +12,11 @@
         "illuminate/mail": "^8.54",
         "illuminate/notifications": "^8.54",
         "laravel/lumen-framework": "^8.0",
-        "ramsey/uuid": "^4.2"
+        "ramsey/uuid": "^4.2",
+        "fakerphp/faker": "^1.9.1"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
+       
         "mockery/mockery": "^1.3.1",
         "phpunit/phpunit": "^9.3"
     },
