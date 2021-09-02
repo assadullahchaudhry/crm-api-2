@@ -20,23 +20,20 @@ class AuthController extends Controller
         ]);
 
 
-        return response()->json([
-            'd' => request()->all(),
-            'url' => url('/v1/oauth/token')
+        $client = new Client();
+
+        $url = url('/v1/oauth/token');
+
+        $response =  $client->post($url, [
+            'form_params' => [
+                'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
+                'client_id' => 2,
+                'grant_type' => 'password',
+                'username' => request()->email,
+                'password' => request()->password
+            ]
         ]);
-
-        // $client = new Client();
-
-        // $response =  $client->post(url('/v1/oauth/token'), [
-        //     'form_params' => [
-        //         'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
-        //         'client_id' => 2,
-        //         'grant_type' => 'password',
-        //         'username' => request()->email,
-        //         'password' => request()->password
-        //     ]
-        // ]);
-        // return $response;
+        return $response;
 
         // $token = oauthLogin(request()->email, request()->password);
 
