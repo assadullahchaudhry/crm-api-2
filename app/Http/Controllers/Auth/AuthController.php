@@ -25,8 +25,6 @@ class AuthController extends Controller
 
         $url = url('/v1/oauth/token');
 
-        return response()->json(['url' => $url]);
-
         try {
             // $response =  $client->post($url, [
             //     'form_params' => [
@@ -39,10 +37,10 @@ class AuthController extends Controller
             // ]);
 
             $response =  $client->request('POST', $url, [
-                'headers' => [
-                    'cache-control' => 'no-cache',
-                    'Content-Type' => 'application/x-www-form-urlencoded'
-                ],
+                // 'headers' => [
+                //     'cache-control' => 'no-cache',
+                //     'Content-Type' => 'application/x-www-form-urlencoded'
+                // ],
                 'form_params' => [
                     'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
                     'client_id' => 2,
