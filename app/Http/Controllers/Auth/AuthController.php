@@ -21,7 +21,8 @@ class AuthController extends Controller
 
 
         return response()->json([
-            'd' => request()->all()
+            'd' => request()->all(),
+            'url' => url('/v1/oauth/token')
         ]);
 
         // $client = new Client();
