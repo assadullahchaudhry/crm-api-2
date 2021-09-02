@@ -25,6 +25,8 @@ class AuthController extends Controller
 
         $url = url('/v1/oauth/token');
 
+        return response()->json(['url' => $url]);
+
         try {
             // $response =  $client->post($url, [
             //     'form_params' => [
