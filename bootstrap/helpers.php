@@ -103,8 +103,10 @@ function oauthLogin($email, $password)
         //$response =  $client->post('http://localhost/workflow-crm-api/public/v1/oauth/token', [
         $response =  $client->post(url('/v1/oauth/token'), [
             'form_params' => [
-                'client_secret' => $oauthClient->secret,
-                'client_id' => $oauthClient->id,
+                // 'client_secret' => $oauthClient->secret,
+                // 'client_id' => $oauthClient->id,
+                'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
+                'client_id' => 2,
                 'grant_type' => 'password',
                 'username' => $email,
                 'password' => $password
