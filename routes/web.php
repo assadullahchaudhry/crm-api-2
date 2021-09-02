@@ -1,18 +1,15 @@
 <?php
 
-use App\Models\User;
+
 
 $router->get('/', function () use ($router) {
-    return response()->json([
-        'user' => User::first()
-    ]);
     return url('/v1/oauth/token');
     return $router->app->version();
 });
 
-// $router->options('/{any:.*}', function () {
-//     return response(['status' => 'success']);
-// });
+$router->options('/{any:.*}', function () {
+    return response(['status' => 'success']);
+});
 
 
 
