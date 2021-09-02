@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 
 
+
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -16,6 +17,10 @@ class AuthController extends Controller
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required'
+        ]);
+
+        return response()->json([
+            'body' => request()->getParseBody()
         ]);
 
 
