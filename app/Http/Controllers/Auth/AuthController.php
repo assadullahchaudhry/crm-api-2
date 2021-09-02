@@ -25,34 +25,39 @@ class AuthController extends Controller
 
         $url = url('/v1/oauth/token');
 
-        try {
-            // $response =  $client->post($url, [
-            //     'form_params' => [
-            //         'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
-            //         'client_id' => 2,
-            //         'grant_type' => 'password',
-            //         'username' => request()->email,
-            //         'password' => request()->password
-            //     ]
-            // ]);
 
-            $response =  $client->request('POST', $url, [
-                // 'headers' => [
-                //     'cache-control' => 'no-cache',
-                //     'Content-Type' => 'application/x-www-form-urlencoded'
-                // ],
-                'form_params' => [
-                    'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
-                    'client_id' => 2,
-                    'grant_type' => 'password',
-                    'username' => request()->email,
-                    'password' => request()->password
-                ]
-            ]);
-            return $response;
-        } catch (BadResponseException $e) {
-            return response()->json($e);
+        // $response =  $client->post($url, [
+        //     'form_params' => [
+        //         'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
+        //         'client_id' => 2,
+        //         'grant_type' => 'password',
+        //         'username' => request()->email,
+        //         'password' => request()->password
+        //     ]
+        // ]);
+
+        $response =  $client->request('POST', $url, [
+            'headers' => [
+                'cache-control' => 'no-cache',
+
+            ],
+            'form_params' => [
+                'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
+                'client_id' => 2,
+                'grant_type' => 'password',
+                'username' => request()->email,
+                'password' => request()->password
+            ]
+        ]);
+        if ($response) {
+            return $response->getBody();
         }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => "No response returned by the client"
+        ]);
+
 
 
         // $token = oauthLogin(request()->email, request()->password);
