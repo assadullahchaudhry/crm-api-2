@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,19 +18,34 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        $token = oauthLogin(request()->email, request()->password);
 
-        return $token;
-        $user = User::where('email', request()->email)->first();
 
-        if (!$user) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Incorrect email or password'
-            ], 400);
-        }
+        $client = new Client();
 
-        return $token;
+        $response =  $client->post(url('/v1/oauth/token'), [
+            'form_params' => [
+                'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
+                'client_id' => 2,
+                'grant_type' => 'password',
+                'username' => request()->email,
+                'password' => request()->password
+            ]
+        ]);
+        return $response;
+
+        // $token = oauthLogin(request()->email, request()->password);
+
+        // return $token;
+        // $user = User::where('email', request()->email)->first();
+
+        // if (!$user) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Incorrect email or password'
+        //     ], 400);
+        // }
+
+        // return $token;
     }
     public function logout(Request $request)
     {
