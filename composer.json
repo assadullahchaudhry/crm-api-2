@@ -5,10 +5,10 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.3|^7.4",
+        "php": "^7.4",
         "dusterio/lumen-passport": "^0.3.4",
         "flipbox/lumen-generator": "^8.2",
-        "guzzlehttp/guzzle": "^7.3",
+        "guzzlehttp/guzzle": "7.3",
         "illuminate/mail": "^8.54",
         "illuminate/notifications": "^8.54",
         "laravel/lumen-framework": "^8.0",
