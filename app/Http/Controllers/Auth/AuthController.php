@@ -19,12 +19,6 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        return response()->json([
-            'body' => request()->getParseBody()
-        ]);
-
-
-
         $client = new Client();
 
         $response =  $client->post(url('/v1/oauth/token'), [
