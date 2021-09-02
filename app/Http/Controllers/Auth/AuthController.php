@@ -6,6 +6,7 @@ use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Exception\BadResponseException;
 
 
 
@@ -24,16 +25,21 @@ class AuthController extends Controller
 
         $url = url('/v1/oauth/token');
 
-        $response =  $client->post($url, [
-            'form_params' => [
-                'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
-                'client_id' => 2,
-                'grant_type' => 'password',
-                'username' => request()->email,
-                'password' => request()->password
-            ]
-        ]);
-        return $response;
+        try {
+            $response =  $client->post($url, [
+                'form_params' => [
+                    'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
+                    'client_id' => 2,
+                    'grant_type' => 'password',
+                    'username' => request()->email,
+                    'password' => request()->password
+                ]
+            ]);
+            return $response;
+        } catch (BadResponseException $e) {
+            return response()->json($e);
+        }
+
 
         // $token = oauthLogin(request()->email, request()->password);
 
