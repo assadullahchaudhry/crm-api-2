@@ -21,9 +21,6 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->post('/password/email', 'Auth\ForgotPasswordController@sendPasswordResetLink');
     $router->put('/reset/password', 'Auth\ForgotPasswordController@resetPassword');
 
-
-
-
     $router->group(['middleware' => 'auth'], function () use ($router) {
 
         //Auth
