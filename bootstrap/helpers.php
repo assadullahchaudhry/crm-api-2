@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use App\Models\OAuthClient;
 use App\Models\User;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
+
+
 
 function getRandomId()
 {
@@ -96,25 +97,32 @@ function oauthLogin($email, $password)
         return false;
     }
 
-    $client = new Client();
-
     try {
 
-        //$response =  $client->post('http://localhost/workflow-crm-api/public/v1/oauth/token', [
-        $response =  $client->post(url('/v1/oauth/token'), [
-            'form_params' => [
-                'client_secret' => $oauthClient->secret,
-                'client_id' => $oauthClient->id,
-                'grant_type' => 'password',
-                'username' => $email,
-                'password' => $password
-            ]
+        $url = url('/v1/oauth/token');
+
+        $response = Http::asForm()->post($url, [
+            'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
+            'client_id' => 2,
+            'grant_type' => 'password',
+            'username' => request()->email,
+            'password' => request()->password
         ]);
-        return $response;
-    } catch (BadResponseException $e) {
+
+        return $response->json();
+
+        // //$response =  $client->post('http://localhost/workflow-crm-api/public/v1/oauth/token', [
+        // $response =  $client->post(url('/v1/oauth/token'), [
+        //     'form_params' => [
+        //         'client_secret' => $oauthClient->secret,
+        //         'client_id' => $oauthClient->id,
+        //         'grant_type' => 'password',
+        //         'username' => $email,
+        //         'password' => $password
+        //     ]
+        // ]);
+        // return $response;
+    } catch (Exception $e) {
         return $e;
     }
-
-
-    return $oauthClient;
 }
