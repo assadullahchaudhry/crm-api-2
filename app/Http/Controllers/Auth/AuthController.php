@@ -23,27 +23,28 @@ class AuthController extends Controller
 
 
 
-        $token = oauthLogin(request()->email, request()->password);
+        // $token = oauthLogin(request()->email, request()->password);
 
-        return $token;
+        // return $token;
+        $url = url('/v1/oauth/token');
 
+        $client = new Client();
+        $response =  $client->request('POST', $url, [
+            'headers' => [
+                'cache-control' => 'no-cache',
 
-        // $response =  $client->request('POST', $url, [
-        //     'headers' => [
-        //         'cache-control' => 'no-cache',
-
-        //     ],
-        //     'form_params' => [
-        //         'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
-        //         'client_id' => 2,
-        //         'grant_type' => 'password',
-        //         'username' => request()->email,
-        //         'password' => request()->password
-        //     ]
-        // ]);
-        // if ($response) {
-        //     return $response->getBody();
-        // }
+            ],
+            'form_params' => [
+                'client_secret' => 'nv7Lzi3o74pNWL7qleLGEaXKnH79aJshQjzoV2zj',
+                'client_id' => 2,
+                'grant_type' => 'password',
+                'username' => request()->email,
+                'password' => request()->password
+            ]
+        ]);
+        if ($response) {
+            return $response->getBody();
+        }
 
         return response()->json([
             'status' => 'error',
