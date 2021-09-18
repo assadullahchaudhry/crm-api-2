@@ -15,8 +15,8 @@ class CreateAucProspectAuditorsTable extends Migration
     {
         Schema::create('auc_prospect_auditors', function (Blueprint $table) {
             $table->id();
-            $table->string('auditorId', 50)->default(null);
-            $table->string('prospectId', 50)->default(null);
+            $table->string('auditorId', 50)->nullable()->default(null);
+            $table->string('prospectId', 50)->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('auditorId')->references('id')->on('auc_users')->onDelete('SET NULL');
