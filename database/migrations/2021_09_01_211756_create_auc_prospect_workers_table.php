@@ -15,8 +15,8 @@ class CreateAucProspectWorkersTable extends Migration
     {
         Schema::create('auc_prospect_workers', function (Blueprint $table) {
             $table->id();
-            $table->string('workerId', 50)->default(null)->nullable();
-            $table->string('prospectId', 50)->default(null)->nullable();
+            $table->string('workerId', 50)->default(null);
+            $table->string('prospectId', 50)->default(null);
             $table->timestamps();
 
             $table->foreign('workerId')->references('id')->on('auc_users')->onDelete('SET NULL');
