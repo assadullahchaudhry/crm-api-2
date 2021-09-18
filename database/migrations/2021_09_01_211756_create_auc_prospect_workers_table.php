@@ -15,7 +15,7 @@ class CreateAucProspectWorkersTable extends Migration
     {
         Schema::create('auc_prospect_workers', function (Blueprint $table) {
             $table->id();
-            $table->string('workerId', 50)->nullabe();
+            $table->string('workerId', 50)->nullable();
             $table->string('prospectId', 50)->nullable();
             $table->timestamps();
 
